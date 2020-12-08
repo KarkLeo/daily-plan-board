@@ -1,16 +1,11 @@
 import axios from "axios";
 import qs from "qs";
 import { stringifyDate } from "../methods/date";
-
-let process = {
-  env: {
-    REACT_APP_API_URL: "https://todos-dpb-dev.herokuapp.com",
-  },
-};
+import config from "../config";
 
 export const getUsers = async (token) => {
   try {
-    let res = await axios.get(`${process.env.REACT_APP_API_URL}/users`, {
+    let res = await axios.get(`${config.API_URL}/users`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -31,14 +26,11 @@ export const getUserTodayTodos = async (token, userId) => {
     ],
   });
   try {
-    let res = await axios.get(
-      `${process.env.REACT_APP_API_URL}/todos?${query}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    let res = await axios.get(`${config.API_URL}/todos?${query}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   } catch (err) {
     return err;

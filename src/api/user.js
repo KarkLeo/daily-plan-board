@@ -1,21 +1,13 @@
 import axios from "axios";
-
-let process = {
-  env: {
-    REACT_APP_API_URL: "https://todos-dpb-dev.herokuapp.com",
-  },
-};
+import config from "../config";
 
 export const registerUser = async (fullName, email, password) => {
   try {
-    let res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/auth/local/register`,
-      {
-        username: fullName,
-        email: email,
-        password: password,
-      }
-    );
+    let res = await axios.post(`${config.API_URL}/auth/local/register`, {
+      username: fullName,
+      email: email,
+      password: password,
+    });
 
     return {
       token: res.data.jwt,
@@ -28,7 +20,7 @@ export const registerUser = async (fullName, email, password) => {
 
 export const loginUser = async (email, password) => {
   try {
-    let res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local`, {
+    let res = await axios.post(`${config.API_URL}/auth/local`, {
       identifier: email,
       password: password,
     });
@@ -43,7 +35,7 @@ export const loginUser = async (email, password) => {
 
 export const testToken = async (token) => {
   try {
-    let res = await axios.get(`${process.env.REACT_APP_API_URL}/users/me`, {
+    let res = await axios.get(`${config.API_URL}/users/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

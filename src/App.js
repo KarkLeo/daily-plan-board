@@ -13,8 +13,6 @@ function App({ screen, testLocalToken }) {
     testLocalToken();
   }, []);
 
-  console.log(process.env);
-
   const router = (screen) => {
     switch (screen) {
       case "login":

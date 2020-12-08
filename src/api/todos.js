@@ -1,12 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 import { stringifyDate } from "../methods/date";
-
-let process = {
-  env: {
-    REACT_APP_API_URL: "https://todos-dpb-dev.herokuapp.com",
-  },
-};
+import config from "../config";
 
 export const getTodayTodos = async (token, userId) => {
   let date = new Date();
@@ -18,14 +13,11 @@ export const getTodayTodos = async (token, userId) => {
     ],
   });
   try {
-    let res = await axios.get(
-      `${process.env.REACT_APP_API_URL}/todos?${query}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    let res = await axios.get(`${config.API_URL}/todos?${query}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   } catch (err) {
     return err;
@@ -36,7 +28,7 @@ export const createTodayTodos = async (token, userId, newTodo) => {
   let date = new Date();
   try {
     let res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/todos`,
+      `${config.API_URL}/todos`,
       {
         title: newTodo.title,
         user: userId,
@@ -58,7 +50,7 @@ export const createTodayTodos = async (token, userId, newTodo) => {
 export const sendEditedTodo = async (token, todo) => {
   try {
     let res = await axios.put(
-      `${process.env.REACT_APP_API_URL}/todos/${todo.id}`,
+      `${config.API_URL}/todos/${todo.id}`,
       {
         ...todo,
       },
