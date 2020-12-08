@@ -2,6 +2,12 @@ import axios from "axios";
 import qs from "qs";
 import { stringifyDate } from "../methods/date";
 
+let process = {
+  env: {
+    REACT_APP_API_URL: "https://todos-dpb-dev.herokuapp.com",
+  },
+};
+
 export const getTodayTodos = async (token, userId) => {
   let date = new Date();
   const query = qs.stringify({

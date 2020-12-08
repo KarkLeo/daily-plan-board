@@ -1,5 +1,11 @@
 import axios from "axios";
 
+let process = {
+  env: {
+    REACT_APP_API_URL: "https://todos-dpb-dev.herokuapp.com",
+  },
+};
+
 export const registerUser = async (fullName, email, password) => {
   try {
     let res = await axios.post(
