@@ -14,9 +14,8 @@ const Todos = ({ todos, username, fetchTodayList, shadowTodos }) => {
   return (
     <div className="todos">
       <h2 className="todos__title">{username}</h2>
-      {todos.map((todo) => (
-        <TodosItem key={todo.id} todo={todo} />
-      ))}
+      {Array.isArray(todos) &&
+        todos.map((todo) => <TodosItem key={todo.id} todo={todo} />)}
 
       <div className="todos__shadow-box">
         {shadowTodos &&

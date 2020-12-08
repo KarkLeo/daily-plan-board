@@ -29,13 +29,15 @@ export const fetchUsers = () => async (dispatch, getState) => {
   let users = await getUsers(token);
   dispatch(
     setUsers(
-      users
-        .filter((user) => user.id !== userId)
-        .map((user) => ({
-          id: user.id,
-          username: user.username,
-          email: user.email,
-        }))
+      Array.isArray(users)
+        ? users
+            .filter((user) => user.id !== userId)
+            .map((user) => ({
+              id: user.id,
+              username: user.username,
+              email: user.email,
+            }))
+        : []
     )
   );
   dispatch(fetchUsersTodos());
