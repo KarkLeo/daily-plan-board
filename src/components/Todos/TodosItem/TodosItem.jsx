@@ -62,8 +62,10 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
         />
       ) : (
         <h3
-          className="todos-item__title todos-item__title--button"
-          onClick={() => toggleEditMode(true)}
+          className={`todos-item__title ${
+            todo.status === "todo" ? "todos-item__title--button" : ""
+          }`}
+          onClick={() => todo.status === "todo" && toggleEditMode(true)}
         >
           {todo.title}
         </h3>
