@@ -40,13 +40,16 @@
   fill: var(--c-yellow-dark);
 }
 
-.todos-item--canceled {
+.todos-item--canceled,
+.todos-item--deleted {
   background-color: var(--c-gray-light);
 }
-.todos-item--canceled .todos-item__status {
+.todos-item--canceled .todos-item__status,
+.todos-item--deleted .todos-item__status {
   color: var(--c-gray-dark);
 }
-.todos-item--canceled .todos-item__status-icon {
+.todos-item--canceled .todos-item__status-icon,
+.todos-item--deleted .todos-item__status-icon {
   fill: var(--c-gray-dark);
 }
 

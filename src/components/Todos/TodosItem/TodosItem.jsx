@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./TodosItem.css";
 import {
   editTodo,
@@ -11,9 +11,20 @@ import TodoItemEditMod from "./TodoItemEditMod/TodoItemEditMod";
 const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
   let [showOptions, toggleOptions] = useState(false);
   let [editMode, toggleEditMode] = useState(false);
+  let optionsMenu = useRef();
   const editTitle = (title) => {
     updateTodoInList({ ...todo, title: title });
   };
+
+  useEffect(() => {
+    const closeOptions = (e) => {
+      if (showOptions && e.target !== optionsMenu.current) toggleOptions(false);
+    };
+    window.document.addEventListener("click", closeOptions);
+    return () => {
+      window.document.removeEventListener("click", closeOptions);
+    };
+  }, [showOptions]);
 
   const statusIcon = {
     todo: "undo",
@@ -79,15 +90,18 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
           iconId={statusIcon[todo.status]}
         />
       )}
-      <span className="options__toggle" onMouseOver={() => toggleOptions(true)}>
+      <span className="options__toggle" onClick={() => toggleOptions(true)}>
         <Icon className="options__toggle-icon" iconId="more_vert" />
       </span>
       {showOptions && (
-        <div className="options" onMouseLeave={() => toggleOptions(false)}>
+        <div className="options" ref={optionsMenu}>
           {todo.status !== "todo" && (
             <button
               className="options__button"
-              onClick={() => updateStatus("todo")}
+              onClick={() => {
+                toggleOptions(false);
+                updateStatus("todo");
+              }}
             >
               <Icon className="options__button-icon" iconId={statusIcon.todo} />
               В процес
@@ -96,7 +110,10 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
           {todo.status !== "todo" && todo.status !== "done" && (
             <button
               className="options__button"
-              onClick={() => updateStatus("done")}
+              onClick={() => {
+                toggleOptions(false);
+                updateStatus("done");
+              }}
             >
               <Icon className="options__button-icon" iconId={statusIcon.done} />
               Сделано
@@ -106,7 +123,10 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
           {todo.status !== "blocked" && (
             <button
               className="options__button"
-              onClick={() => updateStatus("blocked")}
+              onClick={() => {
+                toggleOptions(false);
+                updateStatus("blocked");
+              }}
             >
               <Icon
                 className="options__button-icon"
@@ -119,7 +139,10 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
           {todo.status !== "postponed" && (
             <button
               className="options__button"
-              onClick={() => updateStatus("postponed")}
+              onClick={() => {
+                toggleOptions(false);
+                updateStatus("postponed");
+              }}
             >
               <Icon
                 className="options__button-icon"
@@ -132,7 +155,10 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
           {todo.status !== "canceled" && (
             <button
               className="options__button"
-              onClick={() => updateStatus("canceled")}
+              onClick={() => {
+                toggleOptions(false);
+                updateStatus("canceled");
+              }}
             >
               <Icon
                 className="options__button-icon"
@@ -145,7 +171,10 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
           {todo.status !== "deleted" && (
             <button
               className="options__button"
-              onClick={() => updateStatus("deleted")}
+              onClick={() => {
+                toggleOptions(false);
+                updateStatus("deleted");
+              }}
             >
               <Icon
                 className="options__button-icon"
