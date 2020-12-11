@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import "./TodosItem.css";
-import { editTodo } from "../../../store/todos/todayListReducer";
+import {
+  editTodo,
+  updateTodoInList,
+} from "../../../store/todos/todayListReducer";
 import { connect } from "react-redux";
 import Icon from "../../Sprite/Icon";
+import TodoItemEditMod from "./TodoItemEditMod/TodoItemEditMod";
 
-const TodosItem = ({ todo, editTodo }) => {
+const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
   let [showOptions, toggleOptions] = useState(false);
+  let [editMode, toggleEditMode] = useState(false);
+  const editTitle = (title) => {
+    updateTodoInList({ ...todo, title: title });
+  };
+
   const statusIcon = {
     todo: "undo",
     done: "done_outline",
@@ -29,9 +38,25 @@ const TodosItem = ({ todo, editTodo }) => {
       draggable={true}
       className={`todos-item ${
         todo?.isShadow === true ? "todos-item--shadow" : ""
-      } todos-item--${todo.status}`}
+      } todos-item--${todo.status} ${editMode ? "todos-item--edit-mod" : ""}`}
     >
-      <h3 className="todos-item__title">{todo.title}</h3>
+      {editMode ? (
+        <TodoItemEditMod
+          todo={todo}
+          changeTitle={(title) => editTitle(title)}
+          saveTodo={() => {
+            toggleEditMode(false);
+            editTodo(todo);
+          }}
+        />
+      ) : (
+        <h3
+          className="todos-item__title todos-item__title--button"
+          onClick={() => toggleEditMode(true)}
+        >
+          {todo.title}
+        </h3>
+      )}
 
       <span className="todos-item__status">
         {completedStatusName[todo.status]}
@@ -136,4 +161,6 @@ const TodosItem = ({ todo, editTodo }) => {
 };
 
 let mapStateToProp = (state) => ({});
-export default connect(mapStateToProp, { editTodo })(TodosItem);
+export default connect(mapStateToProp, { editTodo, updateTodoInList })(
+  TodosItem
+);
