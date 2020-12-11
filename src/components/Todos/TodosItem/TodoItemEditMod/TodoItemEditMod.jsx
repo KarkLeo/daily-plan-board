@@ -7,7 +7,6 @@ const TodoItemEditMod = ({ todo, changeTitle, saveTodo }) => {
   };
 
   useEffect(() => {
-    console.log(titleRef);
     titleRef.current.focus();
     titleRef.current.selectionStart = titleRef.current.value.length;
     titleRef.current.style.height = titleRef.current.scrollHeight + "px";
