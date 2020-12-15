@@ -21,9 +21,7 @@ const Dashboard = ({ logOut }) => {
         </div>
       </header>
 
-      <div>
-        <TodosGrid />
-      </div>
+      <TodosGrid />
     </div>
   );
 };
