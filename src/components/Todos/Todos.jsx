@@ -6,7 +6,14 @@ import TodosItem from "./TodosItem/TodosItem";
 import "./Todos.css";
 import CreateNewTodo from "./CreateNewTodo/CreateNewTodo";
 
-const Todos = ({ date, todos, username, fetchTodayList, shadowTodos }) => {
+const Todos = ({
+  date,
+  isCurrentDate,
+  todos,
+  username,
+  fetchTodayList,
+  shadowTodos,
+}) => {
   useEffect(() => {
     fetchTodayList();
   }, [date]);
@@ -17,11 +24,13 @@ const Todos = ({ date, todos, username, fetchTodayList, shadowTodos }) => {
       {Array.isArray(todos) &&
         todos.map((todo) => <TodosItem key={todo.id} todo={todo} />)}
 
-      <div className="todos__shadow-box">
-        {shadowTodos &&
-          shadowTodos.map((todo) => <TodosItem key={todo.id} todo={todo} />)}
-      </div>
-      <CreateNewTodo />
+      {isCurrentDate && (
+        <div className="todos__shadow-box">
+          {shadowTodos &&
+            shadowTodos.map((todo) => <TodosItem key={todo.id} todo={todo} />)}
+        </div>
+      )}
+      {isCurrentDate && <CreateNewTodo />}
     </div>
   );
 };
@@ -31,5 +40,6 @@ let mapStateToProps = (state) => ({
   username: state.user_auth.user.username,
   shadowTodos: state.todos_createTodo.shadowTodos,
   date: state.todos_selection.date,
+  isCurrentDate: state.todos_selection.isCurrentDate,
 });
 export default connect(mapStateToProps, { fetchTodayList })(Todos);

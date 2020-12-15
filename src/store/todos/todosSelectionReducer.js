@@ -4,6 +4,7 @@ const SET_TODOS_SELECTION_DATE = "SET-TODOS-SELECTION-DATE";
 
 const initialState = {
   date: new Date(),
+  isCurrentDate: true,
 };
 
 const todosSelectionReducer = (state = initialState, action) => {
@@ -12,6 +13,8 @@ const todosSelectionReducer = (state = initialState, action) => {
       return {
         ...state,
         date: action.date,
+        isCurrentDate:
+          action.date.toLocaleDateString() === new Date().toLocaleDateString(),
       };
     default:
       return state;

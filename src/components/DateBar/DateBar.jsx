@@ -6,10 +6,15 @@ import { setTodosSelectionDate } from "../../store/todos/todosSelectionReducer";
 import { stringifyDate } from "../../methods/date";
 import Icon from "../Sprite/Icon";
 
-const DateBar = ({ date, prevDay, nextDay, setTodosSelectionDate }) => {
+const DateBar = ({
+  date,
+  isCurrentDate,
+  prevDay,
+  nextDay,
+  setTodosSelectionDate,
+}) => {
   const currentDate = new Date();
 
-  const isCurrentDate = () => date.getDate() === currentDate.getDate();
   const changeDateInput = (e) => {
     if (e.target.valueAsDate) setTodosSelectionDate(e.target.valueAsDate);
   };
@@ -31,13 +36,13 @@ const DateBar = ({ date, prevDay, nextDay, setTodosSelectionDate }) => {
         onClick={() => prevDay()}
       >
         <Icon className="date-bar__icon" iconId="expand_less" />
-        {isCurrentDate() ? "Вчера" : "Предыдущий день"}
+        {isCurrentDate ? "Вчера" : "Предыдущий день"}
       </button>
       <div className="date-bar__item">
         <Icon
           className="date-bar__icon"
           iconId={
-            isCurrentDate() ? "radio_button_checked" : "radio_button_unchecked"
+            isCurrentDate ? "radio_button_checked" : "radio_button_unchecked"
           }
         />
         {date.toLocaleDateString()}
@@ -47,9 +52,9 @@ const DateBar = ({ date, prevDay, nextDay, setTodosSelectionDate }) => {
         onClick={() => nextDay()}
       >
         <Icon className="date-bar__icon" iconId="expand_more" />
-        {isCurrentDate() ? "Завтра" : "Следующий день"}
+        {isCurrentDate ? "Завтра" : "Следующий день"}
       </button>
-      {!isCurrentDate() && (
+      {!isCurrentDate && (
         <button
           className="date-bar__item date-bar__button"
           onClick={() => setTodosSelectionDate(currentDate)}
@@ -62,7 +67,10 @@ const DateBar = ({ date, prevDay, nextDay, setTodosSelectionDate }) => {
   );
 };
 
-let mapStateToProps = (state) => ({ date: state.todos_selection.date });
+let mapStateToProps = (state) => ({
+  date: state.todos_selection.date,
+  isCurrentDate: state.todos_selection.isCurrentDate,
+});
 
 export default connect(mapStateToProps, {
   prevDay,
