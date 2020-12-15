@@ -5,10 +5,10 @@ import "../Todos.css";
 import { fetchUsers } from "../../../store/users/usersListReducer";
 import UsersTodosItem from "./UsersTodosItem/UsersTodosItem";
 
-const UsersTodos = ({ users, todos, fetchUsers }) => {
+const UsersTodos = ({ date, users, todos, fetchUsers }) => {
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [date]);
 
   return (
     <>
@@ -27,6 +27,7 @@ const UsersTodos = ({ users, todos, fetchUsers }) => {
 let mapStateToProps = (state) => ({
   users: state.users_list.users,
   todos: state.users_todos.todos,
+  date: state.todos_selection.date,
 });
 
 export default connect(mapStateToProps, { fetchUsers })(UsersTodos);

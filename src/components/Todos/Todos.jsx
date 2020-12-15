@@ -6,10 +6,10 @@ import TodosItem from "./TodosItem/TodosItem";
 import "./Todos.css";
 import CreateNewTodo from "./CreateNewTodo/CreateNewTodo";
 
-const Todos = ({ todos, username, fetchTodayList, shadowTodos }) => {
+const Todos = ({ date, todos, username, fetchTodayList, shadowTodos }) => {
   useEffect(() => {
     fetchTodayList();
-  }, []);
+  }, [date]);
 
   return (
     <div className="todos">
@@ -30,5 +30,6 @@ let mapStateToProps = (state) => ({
   todos: state.todos_todayList.todos,
   username: state.user_auth.user.username,
   shadowTodos: state.todos_createTodo.shadowTodos,
+  date: state.todos_selection.date,
 });
 export default connect(mapStateToProps, { fetchTodayList })(Todos);

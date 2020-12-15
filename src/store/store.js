@@ -7,6 +7,7 @@ import authReducer from "./user/authReducer";
 
 import todayListReducer from "./todos/todayListReducer";
 import createTodosReducer from "./todos/createTodosReducer";
+import todosSelectionReducer from "./todos/todosSelectionReducer";
 
 import usersListReducer from "./users/usersListReducer";
 
@@ -20,6 +21,7 @@ let reducer = combineReducers({
 
   todos_todayList: todayListReducer,
   todos_createTodo: createTodosReducer,
+  todos_selection: todosSelectionReducer,
 
   users_list: usersListReducer,
   users_todos: usersTodosReducer,

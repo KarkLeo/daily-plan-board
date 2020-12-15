@@ -4,6 +4,10 @@ import { stringifyDate } from "../methods/date";
 
 export const getTodayTodos = async (token, userId) => {
   let date = new Date();
+  return await getDateTodos(token, userId, date);
+};
+
+export const getDateTodos = async (token, userId, date) => {
   const query = qs.stringify({
     _where: [
       { user: userId },

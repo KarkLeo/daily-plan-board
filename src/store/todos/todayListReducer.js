@@ -1,5 +1,5 @@
-import { getTodayTodos } from "../../api/todos";
 import { sendEditedTodo } from "../../api/todos";
+import { getDateTodos } from "../../api/todos";
 
 const SET_TODAY_LIST = "SET-TODAY-LIST";
 const UPDATE_TODO_IN_LIST = "UPDATE-TODO-IN-LIST";
@@ -35,7 +35,8 @@ export const updateTodoInList = (todo) => ({ type: UPDATE_TODO_IN_LIST, todo });
 export const fetchTodayList = () => async (dispatch, getState) => {
   const token = getState().user_auth.token;
   const userId = getState().user_auth.user.id;
-  let todos = await getTodayTodos(token, userId);
+  const date = getState().todos_selection.date;
+  let todos = await getDateTodos(token, userId, date);
   dispatch(setTodayList(todos));
 };
 

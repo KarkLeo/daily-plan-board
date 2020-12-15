@@ -17,6 +17,10 @@ export const getUsers = async (token) => {
 
 export const getUserTodayTodos = async (token, userId) => {
   let date = new Date();
+  return await getUserDateTodos(token, userId, date);
+};
+
+export const getUserDateTodos = async (token, userId, date) => {
   const query = qs.stringify({
     _where: [
       { user_ne: userId },

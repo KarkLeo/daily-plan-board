@@ -1,4 +1,4 @@
-import { getUserTodayTodos } from "../../api/users";
+import { getUserDateTodos } from "../../api/users";
 
 const SET_USERS_TODOS = "SET-USERS-TODOS";
 
@@ -25,7 +25,8 @@ export const setUsersTodos = (todos) => ({ type: SET_USERS_TODOS, todos });
 export const fetchUsersTodos = () => async (dispatch, getState) => {
   const token = getState().user_auth.token;
   const userId = getState().user_auth.user.id;
-  let data = await getUserTodayTodos(token, userId);
+  const date = getState().todos_selection.date;
+  let data = await getUserDateTodos(token, userId, date);
   const users = getState().users_list.users;
   let todos = {};
   users.forEach((user) => {

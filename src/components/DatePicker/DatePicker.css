@@ -1,0 +1,26 @@
+.data-picker {
+  display: inline;
+}
+
+.data-picker__field {
+  width: 9em;
+  padding: 0.25rem 0.75rem;
+  box-sizing: border-box;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+
+  background-color: transparent;
+  border: 2px dashed var(--c-white);
+  border-radius: 0.25rem;
+  outline: none;
+}
+.data-picker__field:focus {
+  border-style: solid;
+}
+
+.data-picker__field::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

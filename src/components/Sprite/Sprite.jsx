@@ -51,6 +51,28 @@ class Sprite extends React.Component {
     <path d="M0 0h24v24H0V0z" fill="none"></path>
     <path d="M20.47 5.63c.39.39.39 1.01 0 1.4L9.13 18.37a.984.984 0 01-1.4 0l-4.2-4.2a.984.984 0 010-1.4.984.984 0 011.4 0l3.5 3.5L19.07 5.63a.984.984 0 011.4 0zm-2.11-2.12l-9.93 9.93-2.79-2.79c-.78-.78-2.05-.78-2.83 0l-1.4 1.4c-.78.78-.78 2.05 0 2.83l5.6 5.6c.78.78 2.05.78 2.83 0L22.59 7.74c.78-.78.78-2.05 0-2.83l-1.4-1.4c-.79-.78-2.05-.78-2.83 0z"></path>
   </symbol>
+  
+   <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="calendar_today">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M20 3h-1V2c0-.55-.45-1-1-1s-1 .45-1 1v1H7V2c0-.55-.45-1-1-1s-1 .45-1 1v1H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 18H5c-.55 0-1-.45-1-1V8h16v12c0 .55-.45 1-1 1z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="expand_more">
+    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87"></path>
+    <path d="M15.88 9.29L12 13.17 8.12 9.29a.996.996 0 10-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 000-1.41c-.39-.38-1.03-.39-1.42 0z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="expand_less">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M11.29 8.71L6.7 13.3a.996.996 0 101.41 1.41L12 10.83l3.88 3.88a.996.996 0 101.41-1.41L12.7 8.71a.996.996 0 00-1.41 0z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="radio_button_unchecked">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="radio_button_checked">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+    <circle cx="12" cy="12" r="5"></circle>
+  </symbol>
 </svg>`,
         }}
       ></div>

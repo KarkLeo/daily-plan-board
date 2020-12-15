@@ -1,0 +1,75 @@
+.date-bar {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 99999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.25rem;
+
+  background-color: var(--c-white);
+  border-radius: 0.5rem 0 0 0.5rem;
+
+  transform: translateY(-50%) translateX(calc(100% - 2rem));
+  box-shadow: var(--shadow-cart);
+  transition: transform 300ms ease-in-out;
+}
+.date-bar:hover {
+  transform: translateY(-50%) translateX(0);
+  transition: transform 300ms ease-in-out 900ms;
+}
+
+.date-bar__item {
+  margin: 0.125rem;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--c-gray-dark);
+}
+.date-bar__button {
+  background-color: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  outline: none;
+  transition: var(--transition-default);
+  cursor: pointer;
+}
+.date-bar__button:hover {
+  background-color: var(--c-gray-light);
+}
+.date-bar__button:hover .date-bar__icon {
+  fill: var(--c-button);
+}
+
+.date-bar__icon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+
+  fill: var(--c-gray-dark);
+  transition: var(--transition-default);
+}
+
+.date-bar__date-picker {
+  padding: 0;
+  width: 9em;
+  box-sizing: border-box;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+
+  background-color: transparent;
+  border: none;
+  outline-color: var(--c-gray);
+}
+.date-bar__date-picker::-webkit-calendar-picker-indicator {
+  filter: contrast(0.5) brightness(2);
+}
