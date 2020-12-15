@@ -12,7 +12,7 @@ const UsersTodosItem = ({ todo }) => {
     deleted: "delete",
   };
   const completedStatusName = {
-    todo: "В процессе",
+    todo: "В планах",
     done: "Седлано",
     blocked: "Заблокировано",
     postponed: "Перенесена",
