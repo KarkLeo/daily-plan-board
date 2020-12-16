@@ -18,7 +18,7 @@ export const defaultPostponedDate = (oldDate) => {
   const nowDate = new Date();
   const currentDate = new Date(oldDate);
 
-  if (nowDate.toLocaleDateString() === currentDate.toLocaleDateString())
+  if (nowDate.toDateString() === currentDate.toDateString())
     return new Date(nowDate.setDate(nowDate.getDate() + 1));
   else return nowDate;
 };

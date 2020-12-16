@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import OptionsPopUp from "./OptionsPopUp";
 import { defaultPostponedDate } from "../../../../methods/date";
 import { stringifyDate } from "../../../../methods/date";
@@ -27,6 +27,7 @@ const OptionsPostponed = ({ todo, onSend, onOutsideClick }) => {
       onSend={() => onSend(postponedDate)}
       onOutsideClick={onOutsideClick}
     >
+      <span>{postponedDate.toISOString()}</span>
       <input
         type="date"
         value={stringifyDate(postponedDate)}
