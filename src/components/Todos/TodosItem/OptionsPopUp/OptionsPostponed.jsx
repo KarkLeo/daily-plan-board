@@ -27,7 +27,6 @@ const OptionsPostponed = ({ todo, onSend, onOutsideClick }) => {
       onSend={() => onSend(postponedDate)}
       onOutsideClick={onOutsideClick}
     >
-      <span>{postponedDate.toISOString()}</span>
       <input
         type="date"
         value={stringifyDate(postponedDate)}
