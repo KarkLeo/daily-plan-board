@@ -1,6 +1,7 @@
 const ROUTER_LOGIN = "ROUTER-LOGIN";
 const ROUTER_REGISTER = "ROUTER-REGISTER";
 const ROUTER_DASHBOARD = "ROUTER-DASHBOARD";
+const ROUTER_UNCOMPLETED = "ROUTER-UNCOMPLETED";
 const ROUTER_SETTINGS = "ROUTER-SETTINGS";
 
 const initialState = {
@@ -24,6 +25,11 @@ const routerReducer = (state = initialState, action) => {
         ...state,
         screen: "dashboard",
       };
+    case ROUTER_UNCOMPLETED:
+      return {
+        ...state,
+        screen: "uncompleted",
+      };
     case ROUTER_SETTINGS: {
       return {
         ...state,
@@ -38,6 +44,7 @@ const routerReducer = (state = initialState, action) => {
 export const routerLogin = () => ({ type: ROUTER_LOGIN });
 export const routerRegister = () => ({ type: ROUTER_REGISTER });
 export const routerDashboard = () => ({ type: ROUTER_DASHBOARD });
+export const routerUncompleted = () => ({ type: ROUTER_UNCOMPLETED });
 export const routerSettings = () => ({ type: ROUTER_SETTINGS });
 
 export default routerReducer;

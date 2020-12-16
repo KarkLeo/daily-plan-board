@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import TodosItem from "./TodosItem/TodosItem";
 import "./Todos.css";
 import CreateNewTodo from "./CreateNewTodo/CreateNewTodo";
+import { editTodo } from "../../store/todos/todayListReducer";
+import { updateTodoInList } from "../../store/todos/todayListReducer";
 
 const Todos = ({
   date,
@@ -13,6 +15,8 @@ const Todos = ({
   username,
   fetchTodayList,
   shadowTodos,
+  editTodo,
+  updateTodoInList,
 }) => {
   useEffect(() => {
     fetchTodayList();
@@ -22,7 +26,14 @@ const Todos = ({
     <div className="todos">
       <h2 className="todos__title">{username}</h2>
       {Array.isArray(todos) &&
-        todos.map((todo) => <TodosItem key={todo.id} todo={todo} />)}
+        todos.map((todo) => (
+          <TodosItem
+            key={todo.id}
+            todo={todo}
+            editTodo={editTodo}
+            updateTodoInList={updateTodoInList}
+          />
+        ))}
 
       {isCurrentDate && (
         <div className="todos__shadow-box">
@@ -42,4 +53,8 @@ let mapStateToProps = (state) => ({
   date: state.todos_selection.date,
   isCurrentDate: state.todos_selection.isCurrentDate,
 });
-export default connect(mapStateToProps, { fetchTodayList })(Todos);
+export default connect(mapStateToProps, {
+  fetchTodayList,
+  editTodo,
+  updateTodoInList,
+})(Todos);

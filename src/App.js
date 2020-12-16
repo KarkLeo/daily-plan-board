@@ -7,6 +7,7 @@ import Register from "./screens/Register";
 import Dashboard from "./screens/Dashboard";
 import Settings from "./screens/Settings";
 import Sprite from "./components/Sprite/Sprite";
+import Uncompleted from "./screens/Uncompleted";
 
 function App({ screen, testLocalToken }) {
   useEffect(() => {
@@ -21,6 +22,8 @@ function App({ screen, testLocalToken }) {
         return <Register />;
       case "dashboard":
         return <Dashboard />;
+      case "uncompleted":
+        return <Uncompleted />;
       case "settings":
         return <Settings />;
       default:

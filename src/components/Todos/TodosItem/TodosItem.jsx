@@ -1,13 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./TodosItem.css";
-import {
-  editTodo,
-  updateTodoInList,
-} from "../../../store/todos/todayListReducer";
-import { connect } from "react-redux";
 import Icon from "../../Sprite/Icon";
 import TodoItemEditMod from "./TodoItemEditMod/TodoItemEditMod";
 
+//todo need test this component in today list
+//todo need destructure this component
+//todo need refactoring
 const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
   let [showOptions, toggleOptions] = useState(false);
   let [editMode, toggleEditMode] = useState(false);
@@ -26,6 +24,7 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
     };
   }, [showOptions]);
 
+  //todo this code translate to language config
   const statusIcon = {
     todo: "undo",
     done: "done_outline",
@@ -42,6 +41,7 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
     canceled: "Отменена",
     deleted: "Удалена",
   };
+  //----------------------------------
 
   const updateStatus = (status) => editTodo({ ...todo, status: status });
   return (
@@ -191,7 +191,4 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
   );
 };
 
-let mapStateToProp = (state) => ({});
-export default connect(mapStateToProp, { editTodo, updateTodoInList })(
-  TodosItem
-);
+export default TodosItem;

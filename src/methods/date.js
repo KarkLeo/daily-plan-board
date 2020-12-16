@@ -5,3 +5,11 @@ export const changeDaysInDate = (date, changedDays) => {
   newDate.setDate(newDate.getDate() + changedDays);
   return newDate;
 };
+
+export const reverseSortDate = (a, b) => {
+  const aDate = new Date(a);
+  const bDate = new Date(b);
+  if (a > b) return -1;
+  if (a < b) return 1;
+  return 0;
+};

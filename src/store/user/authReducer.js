@@ -1,5 +1,5 @@
 import { testToken } from "../../api/user";
-import { routerDashboard, routerLogin } from "../routerReducer";
+import { routerUncompleted, routerLogin } from "../routerReducer";
 import { loginUser } from "../../api/user";
 import { registerUser } from "../../api/user";
 import { cleanLoginFields } from "./loginReducer";
@@ -43,7 +43,7 @@ export const testLocalToken = () => async (dispatch) => {
 
     if (user.id) {
       dispatch(setAuth(token, user));
-      dispatch(routerDashboard());
+      dispatch(routerUncompleted());
     } else {
       window?.localStorage?.removeItem("token");
       dispatch(routerLogin());
@@ -60,7 +60,7 @@ export const registration = () => async (dispatch, setState) => {
   if (auth.token) {
     dispatch(setAuth(auth.token, auth.user));
     window?.localStorage?.setItem("token", auth.token);
-    dispatch(routerDashboard());
+    dispatch(routerUncompleted());
     dispatch(cleanRegisterFields());
   } else {
     console.error("Aut not is die");
@@ -76,7 +76,7 @@ export const logIn = () => async (dispatch, getState) => {
   if (auth.token) {
     dispatch(setAuth(auth.token, auth.user));
     window?.localStorage?.setItem("token", auth.token);
-    dispatch(routerDashboard());
+    dispatch(routerUncompleted());
     dispatch(cleanLoginFields());
   } else {
     console.error("Aut not is die");
