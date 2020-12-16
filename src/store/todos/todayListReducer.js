@@ -1,5 +1,6 @@
 import { sendEditedTodo } from "../../api/todos";
 import { getDateTodos } from "../../api/todos";
+import { createDateTodos } from "../../api/todos";
 
 const SET_TODAY_LIST = "SET-TODAY-LIST";
 const UPDATE_TODO_IN_LIST = "UPDATE-TODO-IN-LIST";
@@ -43,7 +44,33 @@ export const fetchTodayList = () => async (dispatch, getState) => {
 export const editTodo = (todo) => async (dispatch, getState) => {
   const token = getState().user_auth.token;
   dispatch(updateTodoInList({ ...todo, isShadow: true }));
-  let updateTodo = await sendEditedTodo(token, { ...todo, user: todo.user.id });
+  if (todo.status !== "postponed" && todo?.postponed_to?.id) {
+    let deletePostponedTodo = await sendEditedTodo(token, {
+      ...todo.postponed_to,
+      status: "deleted",
+    });
+  }
+  let updateTodo = await sendEditedTodo(token, {
+    ...todo,
+    postponed_to: null,
+    user: todo.user.id,
+  });
+
+  dispatch(fetchTodayList());
+};
+
+export const postponeTodo = (todo, date) => async (dispatch, getState) => {
+  const token = getState().user_auth.token;
+  const userId = getState().user_auth.user.id;
+  dispatch(updateTodoInList({ ...todo, status: "postponed", isShadow: true }));
+  let newTodo = await createDateTodos(token, userId, todo, date);
+  if (newTodo.id) {
+    let updateTodo = await sendEditedTodo(token, {
+      ...todo,
+      status: "postponed",
+      postponed_to: newTodo.id,
+    });
+  }
   dispatch(fetchTodayList());
 };
 

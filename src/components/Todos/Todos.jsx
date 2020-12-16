@@ -8,6 +8,7 @@ import CreateNewTodo from "./CreateNewTodo/CreateNewTodo";
 import { editTodo } from "../../store/todos/todayListReducer";
 import { updateTodoInList } from "../../store/todos/todayListReducer";
 import UsersTodosItem from "./UsersTodos/UsersTodosItem/UsersTodosItem";
+import { postponeTodo } from "../../store/todos/todayListReducer";
 
 const Todos = ({
   date,
@@ -18,6 +19,7 @@ const Todos = ({
   shadowTodos,
   editTodo,
   updateTodoInList,
+  postponeTodo,
 }) => {
   useEffect(() => {
     fetchTodayList();
@@ -34,6 +36,7 @@ const Todos = ({
               todo={todo}
               editTodo={editTodo}
               updateTodoInList={updateTodoInList}
+              postponeTodo={postponeTodo}
             />
           ))
         : Array.isArray(todos) &&
@@ -61,4 +64,5 @@ export default connect(mapStateToProps, {
   fetchTodayList,
   editTodo,
   updateTodoInList,
+  postponeTodo,
 })(Todos);

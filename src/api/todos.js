@@ -77,6 +77,28 @@ export const createTodayTodos = async (token, userId, newTodo) => {
   }
 };
 
+export const createDateTodos = async (token, userId, newTodo, date) => {
+  try {
+    let res = await axios.post(
+      `${process.env.REACT_APP_API_URL}/todos`,
+      {
+        title: newTodo.title,
+        user: userId,
+        date: stringifyDate(date),
+        status: "todo",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const sendEditedTodo = async (token, todo) => {
   try {
     let res = await axios.put(

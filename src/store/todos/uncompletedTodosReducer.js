@@ -1,6 +1,9 @@
 import { getUncompletedTodos } from "../../api/todos";
 import { sendEditedTodo } from "../../api/todos";
 import { routerDashboard } from "../routerReducer";
+import { createDateTodos } from "../../api/todos";
+import { updateTodoInList } from "./todayListReducer";
+import { fetchTodayList } from "./todayListReducer";
 
 const SET_UNCOMPLETED_TODOS = "SET-UNCOMPLETED-TODOS";
 const UPDATE_UNCOMPLETED_TODO = "UPDATE-UNCOMPLETED-TODO";
@@ -66,8 +69,44 @@ export const editUncompletedTodo = (todo) => async (dispatch, getState) => {
   const token = getState().user_auth.token;
 
   dispatch(updateUncompletedTodo({ ...todo, isShadow: true }));
-  let updateTodo = await sendEditedTodo(token, { ...todo, user: todo.user.id }); // todo check user property
+  if (todo.status !== "postponed" && todo?.postponed_to?.id) {
+    let deletePostponedTodo = await sendEditedTodo(token, {
+      ...todo.postponed_to,
+      status: "deleted",
+    });
+  }
+  let updateTodo = await sendEditedTodo(token, {
+    ...todo,
+    postponed_to: null,
+  }); // todo check user property
   dispatch(updateUncompletedTodo(updateTodo));
+  dispatch(
+    toggleHasUncompletedTodo(
+      getState().todos_uncompleted.todos.filter(
+        (todo) => todo.status === "todo"
+      ).length > 0
+    )
+  );
+};
+
+export const postponeUncompletedTodo = (todo, date) => async (
+  dispatch,
+  getState
+) => {
+  const token = getState().user_auth.token;
+  const userId = getState().user_auth.user.id;
+  dispatch(
+    updateUncompletedTodo({ ...todo, status: "postponed", isShadow: true })
+  );
+  let newTodo = await createDateTodos(token, userId, todo, date);
+  if (newTodo.id) {
+    let updateTodo = await sendEditedTodo(token, {
+      ...todo,
+      status: "postponed",
+      postponed_to: newTodo.id,
+    });
+    dispatch(updateUncompletedTodo(updateTodo));
+  }
   dispatch(
     toggleHasUncompletedTodo(
       getState().todos_uncompleted.todos.filter(

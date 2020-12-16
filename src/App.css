@@ -110,6 +110,13 @@
   background-color: var(--c-button-dark);
   box-shadow: var(--shadow-button);
 }
+
+.button:disabled,
+.button:disabled:hover {
+  background-color: var(--c-gray-light);
+  box-shadow: none;
+}
+
 .button--text {
   font-weight: 600;
   color: var(--c-button);

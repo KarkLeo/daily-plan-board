@@ -2,27 +2,18 @@ import React, { useState, useRef, useEffect } from "react";
 import "./TodosItem.css";
 import Icon from "../../Sprite/Icon";
 import TodoItemEditMod from "./TodoItemEditMod/TodoItemEditMod";
+import OptionsPostponed from "./OptionsPopUp/OptionsPostponed";
+import OutsideClickHandler from "../../OutsideClickHandler/OutsideClickHandler";
 
 //todo need test this component in today list
 //todo need destructure this component
 //todo need refactoring
-const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
+const TodosItem = ({ todo, editTodo, updateTodoInList, postponeTodo }) => {
   let [showOptions, toggleOptions] = useState(false);
   let [editMode, toggleEditMode] = useState(false);
-  let optionsMenu = useRef();
   const editTitle = (title) => {
     updateTodoInList({ ...todo, title: title });
   };
-
-  useEffect(() => {
-    const closeOptions = (e) => {
-      if (showOptions && e.target !== optionsMenu.current) toggleOptions(false);
-    };
-    window.document.addEventListener("click", closeOptions);
-    return () => {
-      window.document.removeEventListener("click", closeOptions);
-    };
-  }, [showOptions]);
 
   //todo this code translate to language config
   const statusIcon = {
@@ -42,6 +33,14 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
     deleted: "Удалена",
   };
   //----------------------------------
+
+  let [showPostponed, togglePostponed] = useState(false);
+  const postpone = (date) => {
+    toggleOptions(false);
+    togglePostponed(false);
+    postponeTodo(todo, date);
+  };
+  //---------------------------------
 
   const updateStatus = (status) => editTodo({ ...todo, status: status });
   return (
@@ -96,96 +95,110 @@ const TodosItem = ({ todo, editTodo, updateTodoInList }) => {
         <Icon className="options__toggle-icon" iconId="more_vert" />
       </span>
       {showOptions && (
-        <div className="options" ref={optionsMenu}>
-          {todo.status !== "todo" && (
-            <button
-              className="options__button"
-              onClick={() => {
-                toggleOptions(false);
-                updateStatus("todo");
-              }}
-            >
-              <Icon className="options__button-icon" iconId={statusIcon.todo} />
-              В процес
-            </button>
-          )}
-          {todo.status !== "todo" && todo.status !== "done" && (
-            <button
-              className="options__button"
-              onClick={() => {
-                toggleOptions(false);
-                updateStatus("done");
-              }}
-            >
-              <Icon className="options__button-icon" iconId={statusIcon.done} />
-              Сделано
-            </button>
-          )}
+        <OutsideClickHandler onOutsideClick={() => toggleOptions(false)}>
+          <div className="options">
+            {todo.status !== "todo" && (
+              <button
+                className="options__button"
+                onClick={() => {
+                  toggleOptions(false);
+                  updateStatus("todo");
+                }}
+              >
+                <Icon
+                  className="options__button-icon"
+                  iconId={statusIcon.todo}
+                />
+                В процес
+              </button>
+            )}
+            {todo.status !== "todo" && todo.status !== "done" && (
+              <button
+                className="options__button"
+                onClick={() => {
+                  toggleOptions(false);
+                  updateStatus("done");
+                }}
+              >
+                <Icon
+                  className="options__button-icon"
+                  iconId={statusIcon.done}
+                />
+                Сделано
+              </button>
+            )}
 
-          {todo.status !== "blocked" && (
-            <button
-              className="options__button"
-              onClick={() => {
-                toggleOptions(false);
-                updateStatus("blocked");
-              }}
-            >
-              <Icon
-                className="options__button-icon"
-                iconId={statusIcon.blocked}
-              />
-              Заблокирвать
-            </button>
-          )}
+            {todo.status !== "blocked" && (
+              <button
+                className="options__button"
+                onClick={() => {
+                  toggleOptions(false);
+                  updateStatus("blocked");
+                }}
+              >
+                <Icon
+                  className="options__button-icon"
+                  iconId={statusIcon.blocked}
+                />
+                Заблокирвать
+              </button>
+            )}
 
-          {todo.status !== "postponed" && (
-            <button
-              className="options__button"
-              onClick={() => {
-                toggleOptions(false);
-                updateStatus("postponed");
-              }}
-            >
-              <Icon
-                className="options__button-icon"
-                iconId={statusIcon.postponed}
-              />
-              Перенести
-            </button>
-          )}
+            {todo.status !== "postponed" && (
+              <button
+                className="options__button"
+                onClick={() => {
+                  togglePostponed(true);
+                }}
+              >
+                <Icon
+                  className="options__button-icon"
+                  iconId={statusIcon.postponed}
+                />
+                Перенести
+              </button>
+            )}
 
-          {todo.status !== "canceled" && (
-            <button
-              className="options__button"
-              onClick={() => {
-                toggleOptions(false);
-                updateStatus("canceled");
-              }}
-            >
-              <Icon
-                className="options__button-icon"
-                iconId={statusIcon.canceled}
-              />
-              Отменить
-            </button>
-          )}
+            {todo.status !== "canceled" && (
+              <button
+                className="options__button"
+                onClick={() => {
+                  toggleOptions(false);
+                  updateStatus("canceled");
+                }}
+              >
+                <Icon
+                  className="options__button-icon"
+                  iconId={statusIcon.canceled}
+                />
+                Отменить
+              </button>
+            )}
 
-          {todo.status !== "deleted" && (
-            <button
-              className="options__button"
-              onClick={() => {
-                toggleOptions(false);
-                updateStatus("deleted");
-              }}
-            >
-              <Icon
-                className="options__button-icon"
-                iconId={statusIcon.deleted}
+            {todo.status !== "deleted" && (
+              <button
+                className="options__button"
+                onClick={() => {
+                  toggleOptions(false);
+                  updateStatus("deleted");
+                }}
+              >
+                <Icon
+                  className="options__button-icon"
+                  iconId={statusIcon.deleted}
+                />
+                Удалить
+              </button>
+            )}
+            {showPostponed && (
+              <OptionsPostponed
+                todo={todo}
+                onSend={postpone}
+                onOutsideClick={() => togglePostponed(false)}
               />
-              Удалить
-            </button>
-          )}
-        </div>
+            )}
+          </div>{" "}
+        </OutsideClickHandler>
       )}
     </div>
   );

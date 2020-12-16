@@ -9,7 +9,16 @@ export const changeDaysInDate = (date, changedDays) => {
 export const reverseSortDate = (a, b) => {
   const aDate = new Date(a);
   const bDate = new Date(b);
-  if (a > b) return -1;
-  if (a < b) return 1;
+  if (aDate > bDate) return -1;
+  if (aDate < bDate) return 1;
   return 0;
+};
+
+export const defaultPostponedDate = (oldDate) => {
+  const nowDate = new Date();
+  const currentDate = new Date(oldDate);
+
+  if (nowDate.toLocaleDateString() === currentDate.toLocaleDateString())
+    return new Date(nowDate.setDate(nowDate.getDate() + 1));
+  else return nowDate;
 };

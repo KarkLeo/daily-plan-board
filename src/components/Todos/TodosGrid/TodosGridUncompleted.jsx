@@ -6,12 +6,14 @@ import { reverseSortDate } from "../../../methods/date";
 import TodosItem from "../TodosItem/TodosItem";
 import { updateUncompletedTodo } from "../../../store/todos/uncompletedTodosReducer";
 import { editUncompletedTodo } from "../../../store/todos/uncompletedTodosReducer";
+import { postponeUncompletedTodo } from "../../../store/todos/uncompletedTodosReducer";
 
 const TodosGridUncompleted = ({
   todos,
   fetchUncompletedTodos,
   updateUncompletedTodo,
   editUncompletedTodo,
+  postponeUncompletedTodo,
 }) => {
   useEffect(() => {
     fetchUncompletedTodos();
@@ -40,6 +42,7 @@ const TodosGridUncompleted = ({
               todo={todo}
               editTodo={editUncompletedTodo}
               updateTodoInList={updateUncompletedTodo}
+              postponeTodo={postponeUncompletedTodo}
             />
           ))}
         </div>
@@ -55,4 +58,5 @@ export default connect(mapStateToProps, {
   fetchUncompletedTodos,
   updateUncompletedTodo,
   editUncompletedTodo,
+  postponeUncompletedTodo,
 })(TodosGridUncompleted);

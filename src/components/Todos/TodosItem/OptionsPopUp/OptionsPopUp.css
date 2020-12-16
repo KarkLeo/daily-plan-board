@@ -1,0 +1,40 @@
+.options-pop-up {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  margin: 0;
+
+  background-color: var(--c-white);
+  border-radius: 0.25rem;
+  box-shadow: var(--shadow-cart);
+
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.options-pop-up__button {
+  margin-left: 1rem;
+}
+
+.options-pop-up input {
+  height: min-content;
+  padding: 0.25rem 0.5rem;
+  margin: 0.5rem;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--c-black);
+
+  background-color: var(--c-white);
+  border-radius: 0.25rem;
+  border: 1px solid var(--c-gray);
+  outline: none;
+}
+.options-pop-up input:focus {
+  border-color: var(--c-gray-dark);
+}
