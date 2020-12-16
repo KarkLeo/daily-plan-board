@@ -7,6 +7,7 @@ import "./Todos.css";
 import CreateNewTodo from "./CreateNewTodo/CreateNewTodo";
 import { editTodo } from "../../store/todos/todayListReducer";
 import { updateTodoInList } from "../../store/todos/todayListReducer";
+import UsersTodosItem from "./UsersTodos/UsersTodosItem/UsersTodosItem";
 
 const Todos = ({
   date,
@@ -25,15 +26,18 @@ const Todos = ({
   return (
     <div className="todos">
       <h2 className="todos__title">{username}</h2>
-      {Array.isArray(todos) &&
-        todos.map((todo) => (
-          <TodosItem
-            key={todo.id}
-            todo={todo}
-            editTodo={editTodo}
-            updateTodoInList={updateTodoInList}
-          />
-        ))}
+      {isCurrentDate
+        ? Array.isArray(todos) &&
+          todos.map((todo) => (
+            <TodosItem
+              key={todo.id}
+              todo={todo}
+              editTodo={editTodo}
+              updateTodoInList={updateTodoInList}
+            />
+          ))
+        : Array.isArray(todos) &&
+          todos.map((todo) => <UsersTodosItem key={todo.id} todo={todo} />)}
 
       {isCurrentDate && (
         <div className="todos__shadow-box">
