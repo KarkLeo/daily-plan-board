@@ -68,7 +68,7 @@
 
   font-size: 1rem;
   font-weight: 400;
-  word-break: break-all;
+  word-break: keep-all;
 }
 .todos-item__title--button {
   cursor: pointer;
@@ -83,7 +83,7 @@
   font-size: 1rem;
   font-weight: 400;
   font-family: inherit;
-  word-break: break-all;
+  word-break: keep-all;
 
   background-color: transparent;
   border: none;
