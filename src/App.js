@@ -10,8 +10,8 @@ import Sprite from "./components/Sprite/Sprite";
 import Uncompleted from "./screens/Uncompleted";
 
 function App({ screen, testLocalToken }) {
-  useEffect(() => {
-    testLocalToken();
+  useEffect(async () => {
+    console.log(await testLocalToken());
   }, []);
 
   const router = (screen) => {

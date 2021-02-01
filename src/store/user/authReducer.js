@@ -51,6 +51,8 @@ export const testLocalToken = () => async (dispatch) => {
   } else {
     dispatch(routerLogin());
   }
+
+  return "TEST TOKEN DONE";
 };
 
 export const registration = () => async (dispatch, setState) => {
