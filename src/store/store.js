@@ -34,4 +34,3 @@ let reducer = combineReducers({
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 export default store;
-//test
