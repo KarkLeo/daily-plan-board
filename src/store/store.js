@@ -35,3 +35,4 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 export default store;
 //1111111111111111111111111111111111111111111
+//222222222222222222222222222222222222
